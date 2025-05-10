@@ -2,12 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import studyImage from '../../images/study-01.jpg';
 
+const baseURL = import.meta.env.VITE_APP_BASE_URL;
+
 function DashboardCard01() {
   return (
     <div className="flex flex-col h-full col-span-full sm:col-span-6 xl:col-span-4 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
       <div className="px-5 pt-5 flex-grow">
         <header className="flex justify-between items-start mb-2">
-          <Link to="/courses/beginners-dutch-afrikaners">
+        <Link to={`${baseURL}/courses/beginners-dutch-afrikaners`}>
             <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 hover:underline">
               Beginners Dutch for Afrikaners
             </h2>
