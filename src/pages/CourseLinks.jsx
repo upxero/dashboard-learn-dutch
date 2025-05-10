@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import DashboardLayout from '../layouts/DashboardLayout';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function CourseLinks() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:8055/items/courses')
+    axios.get(`${API_URL}/items/courses`)
       .then(res => {
         setCourses(res.data.data);
         setLoading(false);
@@ -44,4 +46,3 @@ export default function CourseLinks() {
     </DashboardLayout>
   );
 }
-
