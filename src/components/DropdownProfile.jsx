@@ -74,16 +74,16 @@ function DropdownProfile({
           <ul>
             <li>
             <button
-    className="w-full text-left font-medium text-sm text-violet-500 hover:text-violet-600 dark:hover:text-violet-400 flex items-center py-1 px-3"
-    onClick={() => {
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('isAuthenticated');
-      setDropdownOpen(false);
-      navigate('/login');
-    }}
-  >
-    Sign Out
-  </button>
+              className="w-full text-left font-medium text-sm text-violet-500 hover:text-violet-600 dark:hover:text-violet-400 flex items-center py-1 px-3"
+              onClick={() => {
+                localStorage.removeItem('accessToken');
+                localStorage.removeItem('isAuthenticated');
+                setDropdownOpen(false);
+                window.location.href = 'https://learn-dutch-online.netlify.app/';
+              }}
+            >
+              Sign Out
+            </button>
             </li>
           </ul>
         </div>
