@@ -25,7 +25,7 @@ export default function CourseOverview({ courseId }) {
 
         // Haal cursusgegevens op (zonder .id in cover_image)
         const courseRes = await axios.get(
-          `${apiUrl}/items/courses/${courseId}`
+          `${apiUrl}/items/courses/${courseId}?fields=*,cover_image.*`
         );
 
         console.log('Gekozen cursusgegevens:', courseRes.data.data);
@@ -50,10 +50,10 @@ export default function CourseOverview({ courseId }) {
       <div className="relative w-full h-48 md:h-64 mb-6 overflow-hidden rounded-lg">
         {course?.cover_image ? (
           <img
-            src={`${apiUrl}/assets/${course.cover_image}`}
-            alt="Cursus cover"
+            src={`${apiUrl}/assets/${course.cover_image.filename_disk}`}
+            alt={course.cover_image.title || 'Cursus cover'}
             className="w-full h-full object-cover"
-          />
+          />        
         ) : (
           <div className="w-full h-full bg-gray-300" />
         )}
