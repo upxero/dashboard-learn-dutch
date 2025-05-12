@@ -25,8 +25,8 @@ export default function CourseOverview({ courseId }) {
 
         // Haal cursusgegevens op (zonder .id in cover_image)
         const courseRes = await axios.get(
-          `${apiUrl}/items/courses/${courseId}?fields=*,cover_image.*`
-        );
+          `${apiUrl}/items/courses/${courseId}?fields=*,cover_image.filename_disk`
+        );        
 
         console.log('Gekozen cursusgegevens:', courseRes.data.data);
         console.log('Cover image waarde:', courseRes.data.data.cover_image);
