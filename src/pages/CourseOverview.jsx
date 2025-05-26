@@ -23,14 +23,10 @@ export default function CourseOverview({ courseId }) {
         const sortedSessions = sessionRes.data.data.sort((a, b) => a.order - b.order);
         setSessions(sortedSessions);
 
-        // Haal cursusgegevens op (alleen UUID als cover_image)
-        const courseRes = await axios.get(
-          `${apiUrl}/items/courses/${courseId}?fields=*`
-        );
-
+        // Haal cursusgegevens op met cover_image UUID
+        const courseRes = await axios.get(`${apiUrl}/items/courses/${courseId}`);
         console.log('Gekozen cursusgegevens:', courseRes.data.data);
         console.log('Cover image waarde:', courseRes.data.data.cover_image);
-
         setCourse(courseRes.data.data);
 
         setLoading(false);
