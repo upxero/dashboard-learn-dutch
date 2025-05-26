@@ -17,16 +17,16 @@ export default function CourseOverview({ courseId }) {
     const fetchData = async () => {
       try {
         // Haal sessies op
-        const courseRes = await axios.get(
-          `${apiUrl}/items/courses/${courseId}?fields=*,cover_image.filename_disk,cover_image.title`
-        );        
+        const sessionRes = await axios.get(
+          `${apiUrl}/items/sessions?filter[course][_eq]=${courseId}`
+        );
         const sortedSessions = sessionRes.data.data.sort((a, b) => a.order - b.order);
         setSessions(sortedSessions);
 
         // Haal cursusgegevens op (zonder .id in cover_image)
         const courseRes = await axios.get(
-          `${apiUrl}/items/courses/${courseId}?fields=*&deep[cover_image]=*`
-        );              
+          `${apiUrl}/items/courses/${courseId}?fields=*,cover_image.filename_disk,cover_image.title`
+        );                     
 
         console.log('Gekozen cursusgegevens:', courseRes.data.data);
         console.log('Cover image waarde:', courseRes.data.data.cover_image);
@@ -53,7 +53,7 @@ export default function CourseOverview({ courseId }) {
             src={`${apiUrl}/assets/${course.cover_image}`}
             alt="Cursus cover"
             className="w-full h-full object-cover"
-          />               
+          />              
         ) : (
           <div className="w-full h-full bg-gray-300" />
         )}
