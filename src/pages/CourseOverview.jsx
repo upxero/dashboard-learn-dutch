@@ -23,10 +23,10 @@ export default function CourseOverview({ courseId }) {
         const sortedSessions = sessionRes.data.data.sort((a, b) => a.order - b.order);
         setSessions(sortedSessions);
 
-        // Haal cursusgegevens op (zonder .id in cover_image)
+        // Haal cursusgegevens op (alleen UUID als cover_image)
         const courseRes = await axios.get(
-          `${apiUrl}/items/courses/${courseId}?fields=*,cover_image.filename_disk,cover_image.title`
-        );                     
+          `${apiUrl}/items/courses/${courseId}?fields=*`
+        );
 
         console.log('Gekozen cursusgegevens:', courseRes.data.data);
         console.log('Cover image waarde:', courseRes.data.data.cover_image);
@@ -46,14 +46,14 @@ export default function CourseOverview({ courseId }) {
 
   return (
     <DashboardLayout>
-      {/* Cover met afbeelding en titel (correcte stacking) */}
+      {/* Cover met afbeelding en titel */}
       <div className="relative w-full h-48 md:h-64 mb-6 overflow-hidden rounded-lg">
         {course?.cover_image ? (
           <img
             src={`${apiUrl}/assets/${course.cover_image}`}
             alt="Cursus cover"
             className="w-full h-full object-cover"
-          />              
+          />
         ) : (
           <div className="w-full h-full bg-gray-300" />
         )}
