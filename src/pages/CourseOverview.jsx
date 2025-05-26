@@ -17,9 +17,9 @@ export default function CourseOverview({ courseId }) {
     const fetchData = async () => {
       try {
         // Haal sessies op
-        const sessionRes = await axios.get(
-          `${apiUrl}/items/sessions?filter[course][_eq]=${courseId}`
-        );
+        const courseRes = await axios.get(
+          `${apiUrl}/items/courses/${courseId}?fields=*,cover_image.filename_disk,cover_image.title`
+        );        
         const sortedSessions = sessionRes.data.data.sort((a, b) => a.order - b.order);
         setSessions(sortedSessions);
 
@@ -50,10 +50,10 @@ export default function CourseOverview({ courseId }) {
       <div className="relative w-full h-48 md:h-64 mb-6 overflow-hidden rounded-lg">
         {course?.cover_image ? (
           <img
-            src={`${apiUrl}/assets/${course.cover_image.filename_disk}`}
-            alt={course.cover_image.title || 'Cursus cover'}
+            src={`${apiUrl}/assets/${course.cover_image}`}
+            alt="Cursus cover"
             className="w-full h-full object-cover"
-          />        
+          />               
         ) : (
           <div className="w-full h-full bg-gray-300" />
         )}
