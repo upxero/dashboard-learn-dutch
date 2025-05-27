@@ -44,6 +44,7 @@ export default function SessionPage({ baseRoute = 'sessions' }) {
 
         const page = sortedPages.find(p => p.order === order);
         setCurrentPage(page || null);
+        console.log('📄 Geselecteerde pagina:', page);
 
         if (page?.page_section?.length > 0) {
           const sectionsRes = await axios.get(`${apiUrl}/items/sections`, {
