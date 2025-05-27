@@ -19,37 +19,28 @@ export default function SessionPage({ baseRoute = 'sessions' }) {
     const fetchData = async () => {
       if (!sessionId || !pageOrder) return;
 
-      console.log('⏳ Ophalen sessie en pagina’s voor:', { sessionId, pageOrder });
-
       try {
-        // Sessie ophalen
         const sessionRes = await axios.get(`${apiUrl}/items/sessions/${sessionId}`, {
           params: {
             fields: '*,course.id,course.title'
           }
         });
         const sessionData = sessionRes.data.data;
-        console.log('✅ Sessie opgehaald:', sessionData);
         setSession(sessionData);
 
-        // Pagina's ophalen
         const pagesRes = await axios.get(`${apiUrl}/items/pages`, {
           params: {
             filter: {
               sessions: { _eq: sessionId },
             },
-            fields: '*,page_section,cover_image,sessions',
+            fields: '*,page_section,cover_image',
           },
         });
 
-        console.log('📄 Ongefilterde pagina-data:', pagesRes.data.data);
-
         const sortedPages = pagesRes.data.data.sort((a, b) => a.order - b.order);
-        console.log('📄 Gesorteerde pagina’s:', sortedPages);
         setPages(sortedPages);
 
-        const page = sortedPages.find(p => parseInt(p.order, 10) === order);
-        console.log('📄 Geselecteerde pagina:', page);
+        const page = sortedPages.find(p => p.order === order);
         setCurrentPage(page || null);
 
         if (page?.page_section?.length > 0) {
@@ -60,14 +51,12 @@ export default function SessionPage({ baseRoute = 'sessions' }) {
               },
             },
           });
-          console.log('📦 Secties opgehaald:', sectionsRes.data.data);
           setSections(sectionsRes.data.data);
         } else {
-          console.log('ℹ️ Geen secties voor deze pagina');
           setSections([]);
         }
       } catch (err) {
-        console.error('❌ Fout bij ophalen data:', err);
+        console.error('Fout bij ophalen:', err);
       }
     };
 
