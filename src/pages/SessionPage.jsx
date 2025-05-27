@@ -17,10 +17,7 @@ export default function SessionPage({ baseRoute = 'sessions' }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!sessionId || !pageOrder) {
-        console.warn('❗ sessionId of pageOrder ontbreekt', { sessionId, pageOrder });
-        return;
-      }
+      if (!sessionId || !pageOrder) return;
 
       console.log('⏳ Ophalen sessie en pagina’s voor:', { sessionId, pageOrder });
 
@@ -28,8 +25,8 @@ export default function SessionPage({ baseRoute = 'sessions' }) {
         // Sessie ophalen
         const sessionRes = await axios.get(`${apiUrl}/items/sessions/${sessionId}`, {
           params: {
-            fields: '*,course.id,course.title',
-          },
+            fields: '*,course.id,course.title'
+          }
         });
         const sessionData = sessionRes.data.data;
         console.log('✅ Sessie opgehaald:', sessionData);
@@ -41,7 +38,7 @@ export default function SessionPage({ baseRoute = 'sessions' }) {
             filter: {
               sessions: { _eq: sessionId },
             },
-            fields: '*,page_section,cover_image',
+            fields: '*,page_section,cover_image,sessions',
           },
         });
 
@@ -49,12 +46,10 @@ export default function SessionPage({ baseRoute = 'sessions' }) {
 
         const sortedPages = pagesRes.data.data.sort((a, b) => a.order - b.order);
         console.log('📄 Gesorteerde pagina’s:', sortedPages);
-
         setPages(sortedPages);
 
-        const page = sortedPages.find((p) => parseInt(p.order, 10) === order);
+        const page = sortedPages.find(p => parseInt(p.order, 10) === order);
         console.log('📄 Geselecteerde pagina:', page);
-
         setCurrentPage(page || null);
 
         if (page?.page_section?.length > 0) {
@@ -65,14 +60,14 @@ export default function SessionPage({ baseRoute = 'sessions' }) {
               },
             },
           });
-          console.log('🧩 Secties opgehaald:', sectionsRes.data.data);
+          console.log('📦 Secties opgehaald:', sectionsRes.data.data);
           setSections(sectionsRes.data.data);
         } else {
           console.log('ℹ️ Geen secties voor deze pagina');
           setSections([]);
         }
       } catch (err) {
-        console.error('❌ Fout bij ophalen van sessie of pagina’s:', err);
+        console.error('❌ Fout bij ophalen data:', err);
       }
     };
 
