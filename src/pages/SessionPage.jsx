@@ -17,19 +17,25 @@ export default function SessionPage({ baseRoute = 'sessions' }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!sessionId || !pageOrder) return;
+      if (!sessionId || !pageOrder) {
+        console.warn('❗ sessionId of pageOrder ontbreekt', { sessionId, pageOrder });
+        return;
+      }
 
       console.log('⏳ Ophalen sessie en pagina’s voor:', { sessionId, pageOrder });
+
       try {
+        // Sessie ophalen
         const sessionRes = await axios.get(`${apiUrl}/items/sessions/${sessionId}`, {
           params: {
-            fields: '*,course.id,course.title'
-          }
+            fields: '*,course.id,course.title',
+          },
         });
         const sessionData = sessionRes.data.data;
         console.log('✅ Sessie opgehaald:', sessionData);
         setSession(sessionData);
 
+        // Pagina's ophalen
         const pagesRes = await axios.get(`${apiUrl}/items/pages`, {
           params: {
             filter: {
@@ -39,12 +45,17 @@ export default function SessionPage({ baseRoute = 'sessions' }) {
           },
         });
 
+        console.log('📄 Ongefilterde pagina-data:', pagesRes.data.data);
+
         const sortedPages = pagesRes.data.data.sort((a, b) => a.order - b.order);
+        console.log('📄 Gesorteerde pagina’s:', sortedPages);
+
         setPages(sortedPages);
 
-        const page = sortedPages.find(p => parseInt(p.order, 10) === order);
-        setCurrentPage(page || null);
+        const page = sortedPages.find((p) => parseInt(p.order, 10) === order);
         console.log('📄 Geselecteerde pagina:', page);
+
+        setCurrentPage(page || null);
 
         if (page?.page_section?.length > 0) {
           const sectionsRes = await axios.get(`${apiUrl}/items/sections`, {
@@ -54,12 +65,14 @@ export default function SessionPage({ baseRoute = 'sessions' }) {
               },
             },
           });
+          console.log('🧩 Secties opgehaald:', sectionsRes.data.data);
           setSections(sectionsRes.data.data);
         } else {
+          console.log('ℹ️ Geen secties voor deze pagina');
           setSections([]);
         }
       } catch (err) {
-        console.error('Fout bij ophalen:', err);
+        console.error('❌ Fout bij ophalen van sessie of pagina’s:', err);
       }
     };
 
