@@ -19,6 +19,7 @@ export default function SessionPage({ baseRoute = 'sessions' }) {
     const fetchData = async () => {
       if (!sessionId || !pageOrder) return;
 
+      console.log('⏳ Ophalen sessie en pagina’s voor:', { sessionId, pageOrder });
       try {
         const sessionRes = await axios.get(`${apiUrl}/items/sessions/${sessionId}`, {
           params: {
@@ -26,6 +27,7 @@ export default function SessionPage({ baseRoute = 'sessions' }) {
           }
         });
         const sessionData = sessionRes.data.data;
+        console.log('✅ Sessie opgehaald:', sessionData);
         setSession(sessionData);
 
         const pagesRes = await axios.get(`${apiUrl}/items/pages`, {
