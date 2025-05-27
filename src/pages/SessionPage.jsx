@@ -42,7 +42,7 @@ export default function SessionPage({ baseRoute = 'sessions' }) {
         const sortedPages = pagesRes.data.data.sort((a, b) => a.order - b.order);
         setPages(sortedPages);
 
-        const page = sortedPages.find(p => p.order === order);
+        const page = sortedPages.find(p => parseInt(p.order, 10) === order);
         setCurrentPage(page || null);
         console.log('📄 Geselecteerde pagina:', page);
 
