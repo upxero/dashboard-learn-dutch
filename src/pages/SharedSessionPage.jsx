@@ -25,9 +25,8 @@ export default function SharedSessionPage() {
 
         const sharedLink = res.data.data[0];
 
-        if (sharedLink && sharedLink.session_id?.length > 0) {
-          const firstSessionId = sharedLink.session_id[0].id;
-          navigate(`/public-sessions/${firstSessionId}/pages/1`);
+        if (sharedLink && sharedLink.session_id?.id) {
+          navigate(`/public-sessions/${sharedLink.session_id.id}/pages/1`);
         } else {
           setLoading(false);
         }
