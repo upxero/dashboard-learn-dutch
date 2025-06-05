@@ -22,7 +22,12 @@ function SessionPageWrapper({ baseRoute }) {
 
 function App() {
   const location = useLocation();
-  const baseRoute = location.pathname.includes('shared') ? 'shared-sessions' : 'sessions';
+  let baseRoute = 'sessions';
+  if (location.pathname.includes('/public-sessions')) {
+    baseRoute = 'public-sessions';
+  } else if (location.pathname.includes('/public-shared-sessions')) {
+    baseRoute = 'public-shared-sessions';
+  }
 
   useEffect(() => {
     document.querySelector('html').style.scrollBehavior = 'auto';
