@@ -19,15 +19,14 @@ export default function SharedSessionPage() {
               token: { _eq: token },
               expires_at: { _gte: now },
             },
-            fields: 'session_id.id', // many-to-many relation
+            fields: 'session_id.id,pages.id',
           },
         });
 
         const sharedLink = res.data.data[0];
 
-        if (sharedLink && Array.isArray(sharedLink.session_id) && sharedLink.session_id.length > 0) {
-          const firstSessionId = sharedLink.session_id[0].id;
-          navigate(`/public-sessions/${firstSessionId}/pages/1`);
+        if (sharedLink && sharedLink.session_id?.id) {
+          navigate(`/public-sessions/${sharedLink.session_id.id}/pages/1`);
         } else {
           setLoading(false);
         }
