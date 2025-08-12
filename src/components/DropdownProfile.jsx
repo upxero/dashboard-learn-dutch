@@ -79,7 +79,7 @@ function DropdownProfile({
                 localStorage.removeItem('accessToken');
                 localStorage.removeItem('isAuthenticated');
                 setDropdownOpen(false);
-                window.location.replace('https://learn-dutch-online.netlify.app/');
+                window.location.replace('https://learn-dutch-online.com/');
               }}
             >
               Sign Out
