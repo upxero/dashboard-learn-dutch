@@ -13,7 +13,7 @@ export default function SlugCoursePage() {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const res = await axios.get(`https://www.upxero.be/items/courses?filter[slug][_eq]=${slug}`);
+        const res = await axios.get(`https://cms.learn-dutch-online.com/items/courses?filter[slug][_eq]=${slug}`);
         const course = res.data.data[0];
         if (course) {
           setCourseId(course.id);

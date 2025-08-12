@@ -7,8 +7,8 @@ function Banner() {
   const template = query.get('template');
   const liteLink =
     template === 'laravel'
-      ? 'https://www.upxero.be/'
-      : 'https://www.upxero.be/';
+      ? 'https://cms.learn-dutch-online.com/'
+      : 'https://cms.learn-dutch-online.com/';
 
   return (
     <>
