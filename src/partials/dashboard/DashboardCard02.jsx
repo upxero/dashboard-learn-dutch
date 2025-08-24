@@ -21,7 +21,9 @@ function DashboardCard02() {
       <div className="px-5 pt-5 flex-grow">
         <header className="flex justify-between items-start mb-2">
         <Link to="/courses/ultimate-beginners-dutch">
-          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Ultimate beginners Dutch</h2>
+          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">
+            Ultimate beginners Dutch
+          </h2>
         </Link>  
         {/* Copy button */}
         <button 

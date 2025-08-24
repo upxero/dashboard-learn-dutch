@@ -21,7 +21,7 @@ function DashboardCard01() {
       <div className="px-5 pt-5 flex-grow">
         <header className="flex justify-between items-start mb-2">
           <Link to={courseLink}>
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 hover:underline">
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">
               Beginners Dutch for Afrikaners
             </h2>
           </Link>
