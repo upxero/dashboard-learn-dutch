@@ -1,9 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import EditMenu from '../../components/DropdownEditMenu';
 import studyImage from '../../images/study-02.jpg';
+import { ClipboardIcon } from '@heroicons/react/24/outline';
 
 function DashboardCard02() {
+  const courseLink = 'https://www.learn-dutch-online.com/ultimatebeginnersdutch/';
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(courseLink)
+      .then(() => {
+        alert('Link gekopieerd naar clipboard!');
+      })
+      .catch((err) => {
+        console.error('Fout bij kopiëren: ', err);
+      });
+  };
+
   return (
     <div className="flex flex-col h-full col-span-full sm:col-span-6 xl:col-span-4 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
       <div className="px-5 pt-5 flex-grow">
@@ -11,6 +23,14 @@ function DashboardCard02() {
         <Link to="/courses/ultimate-beginners-dutch">
           <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Ultimate beginners Dutch</h2>
         </Link>  
+        {/* Copy button */}
+        <button 
+          onClick={copyToClipboard} 
+          className="ml-2 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+          title="Kopieer link"
+        >
+          <ClipboardIcon className="h-5 w-5 text-gray-500 dark:text-gray-300" />
+        </button>
         </header>
         <div className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-1">Sessions</div>
         <div className="flex items-start">

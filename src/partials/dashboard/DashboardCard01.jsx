@@ -29,7 +29,7 @@ function DashboardCard01() {
           <button 
             onClick={copyToClipboard} 
             className="ml-2 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
-            title="Copy link"
+            title="Kopieer link"
           >
             <ClipboardIcon className="h-5 w-5 text-gray-500 dark:text-gray-300" />
           </button>
