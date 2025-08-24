@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import studyImage from '../../images/study-01.jpg';
-import { ClipboardIcon } from '@heroicons/react/outline'; 
+import { ClipboardIcon } from '@heroicons/react/24/outline';
 
 function DashboardCard01() {
   const courseLink = 'https://www.learn-dutch-online.com/afrikaans-dutch-1/';
@@ -29,7 +29,7 @@ function DashboardCard01() {
           <button 
             onClick={copyToClipboard} 
             className="ml-2 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
-            title="Kopieer link"
+            title="Copy link"
           >
             <ClipboardIcon className="h-5 w-5 text-gray-500 dark:text-gray-300" />
           </button>

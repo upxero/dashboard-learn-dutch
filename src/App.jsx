@@ -13,6 +13,7 @@ import SessionRedirect from './pages/SessionRedirect';
 import SharedSessionPage from './pages/SharedSessionPage';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
+import { Navigate } from 'react-router-dom';
 
 // Wrapper zodat SessionPage herlaadt bij elke routewijziging
 function SessionPageWrapper({ baseRoute }) {
@@ -37,7 +38,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Navigate to="/" />} />
 
       <Route
         path="/"
