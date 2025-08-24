@@ -20,7 +20,7 @@ function DashboardCard03() {
     <div className="flex flex-col h-full col-span-full sm:col-span-6 xl:col-span-4 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
       <div className="px-5 pt-5 flex-grow">
         <header className="flex justify-between items-start mb-2">
-        <Link to="/courses/beginners-plus-dutch">
+        <Link to={courseLink}>
           <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Beginners plus Dutch</h2>
         </Link>  
         {/* Copy button */}
